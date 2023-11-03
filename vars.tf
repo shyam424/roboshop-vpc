@@ -5,4 +5,4 @@ variable "default_vpc_route_table_id" {}
 variable "tags" {}
 variable "env" {}
 variable "lb" {}
-variable "sg_ingress_cidr" {}
+#variable "sg_ingress_cidr" {}
