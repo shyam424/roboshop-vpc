@@ -21,7 +21,7 @@ module "lb" {
   lb_type                    = each.value["lb_type"]
   sg_ingress_cidr            = each.value["sg_ingress_cidr"]
   vpc_id                     = each.value["internal"] ? local.vpc_id : var.default_vpc_id  #check terrafrom conditions
-  subnets                    = each.value["internal"] ? data.aws_subnets.subnets.ids : local.app_subnets
+  subnets                    = each.value["internal"] ?  local.app_subnets : data.aws_subnets.subnets.ids
   tags                       = var.tags
   env                        = var.env
   sg_port                    = each.value ["sg_port"]
