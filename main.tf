@@ -29,6 +29,14 @@ module "lb" {
 }
 
 
+module "docdb" {
+
+  source                     = "git::https://github.com/shyam424/tf-module-docdb.git"
+  tags                       = var.tags
+  env                        = var.env
+
+  for_each                   = var.docdb
+}
 
 #output which is available in the main terraform code we call it as printing
 

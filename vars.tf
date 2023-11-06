@@ -7,3 +7,5 @@ variable "env" {}
 variable "lb" {}
 #variable "sg_ingress_cidr" {}  #dont declare the variable unnecessarily, this will cause issues,
 #we didnt used var.sg_ingress_cidr anywhere in the roboshop-vpc which caused the issue, so commeneted the variable "sg_ingress_cidr"
+
+variable "docdb" {}
