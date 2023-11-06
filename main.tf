@@ -42,7 +42,7 @@ module "docdb" {
   skip_final_snapshot     =  each.value ["skip_final_snapshot"]
   vpc_id                  = local.vpc_id
   sg_ingress_cidr         = local.app_subnets_cidr
-  engine_version          = each.value["engine_vesrion"]
+  engine_version          = each.value["engine_version"]
 }
 
 #output which is available in the main terraform code we call it as printing
