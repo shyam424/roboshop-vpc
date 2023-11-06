@@ -37,6 +37,11 @@ module "docdb" {
 
   for_each                   = var.docdb
   subnet_ids                 = local.db_subnets
+  backup_retention_period =  each.value ["backup_retention_period"]
+  preferred_backup_window =  each.value ["preferred_backup_window"]
+  skip_final_snapshot     =  each.value ["skip_final_snapshot"]
+  vpc_id                  = vpc_id
+  sg_ingress_cidr         = local.app_subnets_cidr
 }
 
 #output which is available in the main terraform code we call it as printing
