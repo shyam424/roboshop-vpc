@@ -9,3 +9,4 @@ variable "lb" {}
 #we didnt used var.sg_ingress_cidr anywhere in the roboshop-vpc which caused the issue, so commeneted the variable "sg_ingress_cidr"
 
 variable "docdb" {}
+variable "rds" {}
