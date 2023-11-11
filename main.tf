@@ -12,7 +12,7 @@ module "vpc" {
 
 }
 
-
+#---------------------------------------------------load balancer
 module "lb" {
 
   source                     = "git::https://github.com/shyam424/tf-module-lb.git"
@@ -28,7 +28,7 @@ module "lb" {
 
 }
 
-
+#-----------------------------------------------------Databases
 module "docdb" {
 
   source                     = "git::https://github.com/shyam424/tf-module-docdb.git"
@@ -111,15 +111,32 @@ module "rabbitmq" {
   subnet_ids                 = local.db_subnets
   vpc_id                     = local.vpc_id
   sg_ingress_cidr            = local.app_subnets_cidr
-  ssh_ingress_cidr           = each.value ["ssh_ingress_cidr"]
+  ssh_ingress_cidr           = var.ssh_ingress_cidr
   instance_type              = each.value ["instance_type"]
 
 }
 
 
+#------------------------------------APP
+module "app" {
+  source = "git::https://github.com/shyam424/tf-module-app.git"
 
-#variable "ssh_ingress_cidr" {}
-#variable "instance_type" {}
+#-direct variables
+  tags                       = var.tags
+  env                        = var.env
+  zone_id                    = var.zone_id
+  ssh_ingress_cidr            = var.ssh_ingress_cidr
 
+#-loop related things
+  for_each            = var.apps
+  component           = each.key
+  port                = each.value["port"]
+  instance_type       = each.value["instance_type"]
+
+#-local variables
+  sg_ingress_cidr     = local.app_subnets_cidr
+  vpc_id              = local.vpc_id
+  subnet_ids          = local.app_subnets
+}
 
 
