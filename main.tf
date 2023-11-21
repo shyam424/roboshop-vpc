@@ -132,11 +132,17 @@ module "app" {
   component           = each.key
   port                = each.value["port"]
   instance_type       = each.value["instance_type"]
+  desired_capacity   = each.value["desired_capacity"]
+  max_size           = each.value["max_size"]
+  min_size           = each.value["min_size"]
 
 #-local variables
   sg_ingress_cidr     = local.app_subnets_cidr
   vpc_id              = local.vpc_id
   subnet_ids          = local.app_subnets
+
+  lb_name            = lookup(lookup(lookup(module.lb, "private", null), "lb", null), "dns_name", null)
+#alb (in the videos) has been modified as lb in our script
 }
 
 
