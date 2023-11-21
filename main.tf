@@ -145,7 +145,7 @@ module "app" {
   lb_name            = lookup(lookup(lookup(module.lb, "private", null), "lb", null), "dns_name", null)
 #alb (in the videos) has been modified as lb in our script
 
-  listener            = lookup(lookup(lookup(module.lb, "private", null), "lb", null), "arn", null)
+  listener           = lookup(lookup(lookup(module.lb, "private", null), "listener", null), "arn", null)
 }
 
 
